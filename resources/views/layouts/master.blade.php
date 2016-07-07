@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="top_links hidden-xs" style="padding: 13px 0px;">
-                        <b>Lorem ipsum dolor.</b>
+                        <b>{{ trans('home.Дай возможность сказать спасибо. Дай жизнь.') }}</b>
                     </div>
 
                     {{--<ul class="language_bar_chooser">
@@ -89,9 +89,9 @@
             <div class="signuplight">
                 <h4 class="text-muted">Medicato</h4>
                 <ul>
-                    <li><a href="user?act=index">Личный кабинет</a></li>
+                    <li><a href="#">Личный кабинет</a></li>
                     <li><a href="#">Услуги и стоимость</a></li>
-                    <li><a href="adult">Специализации</a></li>
+                    <li><a href="#">Специализации</a></li>
                     <li><a href="#">Врачи</a></li>
                 </ul>
             </div>
@@ -101,7 +101,7 @@
             <div>
                 <h4 class="text-muted">О компании</h4>
                 <ul>
-                    <li><a href="contact">Контакты</a></li>
+                    <li><a href="#">Контакты</a></li>
                     <li><a href="#">Договора</a></li>
                     <li><a href="#">Отзывы</a></li>
                     <li><a href="#">Оферта</a></li>

@@ -15,3 +15,7 @@ Route::group(['prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalizati
 {
     Route::get('/', 'Controller@index');
 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
