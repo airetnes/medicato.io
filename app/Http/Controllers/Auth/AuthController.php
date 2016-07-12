@@ -59,6 +59,18 @@ class AuthController extends Controller
     }
 
     /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'first_name.required' => 'Заполните поле Имя',
+        ];
+    }
+
+    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data

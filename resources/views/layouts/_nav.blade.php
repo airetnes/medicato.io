@@ -1,45 +1,43 @@
 <div class="col-md-12">
     <div class="row">
-        <a id="touch-menu" class="mobile-menu" href="{{ url('#') }}"><i class="fa fa-navicon"></i>{{ trans('home.Меню') }}</a>
+        <a id="touch-menu" class="mobile-menu" href="{{ url('#') }}"><i class="fa fa-navicon"></i>{{ trans('nav.Меню') }}</a>
 
         <nav id="glavnav" class="signuplight">
             <ul class="menu1">
-                <li><a href="{{ url('#') }}"><i class="fa fa-medkit"></i>{{ trans('home.Услуги и стоимость') }}</a>
+                <li><a href="{{ url('#') }}"><i class="fa fa-medkit"></i>{{ trans('nav.Услуги и стоимость') }}</a>
                     <ul class="sub-menu">
-                        <li><a href="{{ url('#') }}">{{ trans('home.Описание МРТ и КТ') }}</a></li>
-                        <li><a href="{{ url('#') }}">{{ trans('home.Видеоконсультация') }}</a></li>
-                        <li><a href="{{ url('#') }}">{{ trans('home.Экстренная консультация') }}</a></li>
-                        <li><a href="{{ url('#') }}">{{ trans('home.Услуги и стоимость') }}</a></li>
+                        <li><a href="{{ url('#') }}">{{ trans('nav.Описание МРТ и КТ') }}</a></li>
+                        <li><a href="{{ url('#') }}">{{ trans('nav.Видеоконсультация') }}</a></li>
+                        <li><a href="{{ url('#') }}">{{ trans('nav.Экстренная консультация') }}</a></li>
+                        <li><a href="{{ url('#') }}">{{ trans('nav.Услуги и стоимость') }}</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ url('#') }}"><i class="fa fa-user-md"></i>{{ trans('home.Врачи') }}</a>
+                <li><a href="{{ url('#') }}"><i class="fa fa-user-md"></i>{{ trans('nav.Врачи') }}</a>
                     <ul class="sub-menu">
-                        <li><a href="{{ url('#') }}">{{ trans('home.Клиники-партнеры') }}</a></li>
-                        <li><a href="{{ url('#') }}">{{ trans('home.Выбор специалиста') }}</a></li>
-                        <li><a href="{{ url('#') }}">{{ trans('home.Лучевая диагностика') }}</a></li>
+                        <li><a href="{{ url('#') }}">{{ trans('nav.Клиники-партнеры') }}</a></li>
+                        <li><a href="{{ url('#') }}">{{ trans('nav.Выбор специалиста') }}</a></li>
+                        <li><a href="{{ url('#') }}">{{ trans('nav.Лучевая диагностика') }}</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ url('#') }}"><i class="fa fa-stethoscope"></i>{{ trans('home.Специализации') }}</a>
+                <li><a href="{{ url('#') }}"><i class="fa fa-stethoscope"></i>{{ trans('nav.Специализации') }}</a>
                     <ul class="sub-menu">
-                        <li><a href="{{ url('#') }}">{{ trans('home.Взрослые') }}</a></li>
-                        <li><a href="{{ url('#') }}">{{ trans('home.Дети') }}</a></li>
+                        <li><a href="{{ url('#') }}">{{ trans('nav.Взрослые') }}</a></li>
+                        <li><a href="{{ url('#') }}">{{ trans('nav.Дети') }}</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ url('#') }}"><i class="fa fa-map-marker"></i>{{ trans('home.Контакты') }}</a></li>
-                <li><a href="{{ url('/login') }}"><i class="fa fa-user"></i>{{ trans('home.Личный кабинет') }}</a></li>
+                <li><a href="{{ url('#') }}"><i class="fa fa-map-marker"></i>{{ trans('nav.Контакты') }}</a></li>
 
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ url('/login') }}"><i class="fa fa-user"></i>{{ trans('nav.Личный кабинет') }}</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }} <span class="caret"></span>
                             </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <ul class="sub-menu" role="menu">
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>{{ trans('nav.Выход') }}</a></li>
                             </ul>
                         </li>
                     @endif
