@@ -21,82 +21,99 @@
 
             {{--'password' => 'required|min:6|confirmed',--}}
             {{--'role_id' => 'required|integer|digits_between:1,2'--}}
-            <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                <label for="last_name">Фамилия</label>
 
-                <div class="input-group">
-                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Ваша фамилия" value="{{ old('last_name') }}">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                        <label for="last_name">Фамилия</label>
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Ваша фамилия" value="{{ old('last_name') }}">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                        <label for="first_name">Имя</label>
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Ваше имя" value="{{ old('first_name') }}">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
+                        <label for="middle_name">Отчество</label>
+
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Ваше отчество" value="{{ old('middle_name') }}">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                <label for="first_name">Имя</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label for="email">Эл.почта</label>
 
-                <div class="input-group">
-                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Ваше имя" value="{{ old('first_name') }}">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Ваш E-Mail" value="{{ old('email') }}">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="user_phone">Телефон</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="user_phone" name="user_phone" placeholder="Номер телефона" value="">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('middle_name') ? ' has-error' : '' }}">
-                <label for="middle_name">Отчество</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label for="password">Пароль</label>
 
-                <div class="input-group">
-                    <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Ваше отчество" value="{{ old('middle_name') }}">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                        <label for="password_confirmation">Повторите пароль</label>
+
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Повторите пароль">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                <label for="email">Эл.почта</label>
-
-                <div class="input-group">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Ваш E-Mail" value="{{ old('email') }}">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                </div>
-            </div>
-
-            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                <label for="password">Пароль</label>
-
-                <div class="input-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                </div>
-            </div>
-
-            <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                <label for="password_confirmation">Повторите пароль</label>
-
-                <div class="input-group">
-                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Повторите пароль">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <label for="user_phone">Телефон</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="user_phone" name="user_phone" placeholder="Номер телефона" value="">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                </div>
-            </div>
             <div class="form-group">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-success {{ (old('role_id') == 1) ? 'active' : '' }}">
-                        <input type="radio" name="role_id" id="option1" value="1" autocomplete="off" {{ (old('role_id') == 1) ? 'checked' : '' }}> Пользователь
+                        <input type="radio" name="role_id" id="option1" value="1" autocomplete="off" {{ (old('role_id') == 1) ? 'checked' : '' }}><i class="fa fa-btn fa-user"></i> Пользователь
                     </label>
                     <label class="btn btn-success {{ (old('role_id') == 2) ? 'active' : '' }}">
-                        <input type="radio" name="role_id" id="option2" value="2" autocomplete="off" {{ (old('role_id') == 2) ? 'checked' : '' }}> Специалист
+                        <input type="radio" name="role_id" id="option2" value="2" autocomplete="off" {{ (old('role_id') == 2) ? 'checked' : '' }}><i class="fa fa-btn fa-user-md"></i> Специалист
                     </label>
                 </div>
             </div>
 
 
             <button type="submit" class="btn btn-primary">
-                <i class="fa fa-btn fa-user"></i> Зарегистрироваться
+                Зарегистрироваться
             </button>
         </form>
 
