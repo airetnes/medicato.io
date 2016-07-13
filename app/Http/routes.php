@@ -29,5 +29,16 @@ Route::group(
         Route::get('/', 'Controller@index');
         Route::auth();
         Route::get('/home', 'HomeController@index');
+
+
+        // личный кабинет
+
+        Route::group(['middleware' => 'auth'], function()
+        {
+            Route::get('/user', 'User\UserController@index');
+        });
+
+
+
     });
 
