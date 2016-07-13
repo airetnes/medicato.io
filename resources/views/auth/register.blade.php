@@ -7,7 +7,6 @@
         @if (count($errors) > 0)
             <div class="alert alert-danger alert-dismissible" id="error-alert" style="margin-top:20px;" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                При регистрации возникли проблемы.
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -16,7 +15,7 @@
 
         <h3>Регистрация</h3>
 
-        <form class="well" role="form" method="POST" action="{{ url('/register') }}">
+        <form class="well" role="form" method="POST" action="{{ LaravelLocalization::getLocalizedURL(null,'/register') }}">
             {{ csrf_field() }}
 
             {{--'password' => 'required|min:6|confirmed',--}}
@@ -68,9 +67,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="user_phone">Телефон</label>
+                        <label for="phone">Телефон</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="user_phone" name="user_phone" placeholder="Номер телефона" value="">
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Номер телефона" value="">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
                     </div>

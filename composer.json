@@ -6,7 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*"
+        "laravel/framework": "5.2.*",
+        "barryvdh/laravel-ide-helper": "v2.2.1"
     },
     "require-dev": {
         "mcamara/laravel-localization": "1.1.*",
@@ -16,7 +17,8 @@
         "symfony/css-selector": "2.8.*|3.0.*",
         "symfony/dom-crawler": "2.8.*|3.0.*",
         "laravelcollective/html": "5.2.*",
-        "phpoffice/phpword": "dev-master"
+        "phpoffice/phpword": "dev-master",
+        "barryvdh/laravel-debugbar": "2.2.*"
     },
     "autoload": {
         "classmap": [
@@ -44,6 +46,7 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
             "php artisan optimize"
         ]
     },

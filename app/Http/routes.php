@@ -11,11 +11,23 @@
 |
 */
 
-Route::group(['prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale()], function()
-{
-    Route::get('/', 'Controller@index');
-    Route::auth();
-    Route::get('/home', 'HomeController@index');
-});
+//Route::group(['prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale()], function()
+//{
+//    Route::get('/', 'Controller@index');
+//    Route::auth();
+//    Route::get('/home', 'HomeController@index');
+//});
 
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect' ]
+    ],
+    function()
+    {
+        Route::get('/', 'Controller@index');
+        Route::auth();
+        Route::get('/home', 'HomeController@index');
+    });
 

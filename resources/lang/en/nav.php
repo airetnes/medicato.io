@@ -20,5 +20,6 @@ return [
     'Дети' => 'Children',
     'Контакты' => 'Contacts',
     'Личный кабинет' => 'Sign in',
+    'Панель управления' => 'Dashboard',
     'Выход' => 'Logout',
 ];
