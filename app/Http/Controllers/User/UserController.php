@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,11 @@ class UserController extends Controller
 
     public function index() {
         $user = \Auth::user();
-        dd($user->getFillable());
-dd($user);
-        return view('user.main');
+        $role = $user->getRoleName($user->role_id);
+        
+        return view('user.main', [
+            'user' => $user,
+            'role' => $role
+        ]);
     }
 }

@@ -33,9 +33,8 @@ class AuthController extends Controller
     protected $redirectAfterLogout = '/';
 
     /**
+     * AuthController constructor.
      * Create a new authentication controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {

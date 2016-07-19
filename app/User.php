@@ -24,4 +24,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
+    public function getRoleName($role_id) {
+        switch ($role_id) {
+            case '1': return 'Пользователь'; break;
+            case '2': return 'Доктор'; break;
+        }
+    }
+    
 }
