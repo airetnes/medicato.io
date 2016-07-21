@@ -112,9 +112,9 @@
                             <img src="http://news.kaznmu.kz/eng/wp-content/uploads/2015/01/IMG-20150120-WA0048-160x160.jpg" class="img-circle" alt="User Image">
 
                             <p>
-                                {{ $user->last_name }} {{ $user->first_name }} {{ $user->middle_name }}
+                                {{ $user->last_name }} {{ $user->first_name }}
                                 - {{ $role }}
-                                <small>Member since Nov. 2012</small>
+                                <small>На medicato с {{ $user->created_at }}</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -135,10 +135,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="#" class="btn btn-default btn-flat">{{ trans('user/top_nav.Профиль') }}</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="#" class="btn btn-default btn-flat">{{ trans('user/top_nav.Выход') }}</a>
                             </div>
                         </li>
                     </ul>
