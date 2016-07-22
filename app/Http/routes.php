@@ -35,7 +35,13 @@ Route::group(
 
         Route::group(['middleware' => 'auth'], function()
         {
-            Route::get('/user', 'User\UserController@index');
+            Route::get('/user', 'User\UserController@main');
+            
+            Route::get('/user/profile', 'User\UserController@profile');
+            Route::post('/user/edit_profile', 'User\UserController@edit_profile');
+            
+            Route::get('/user/message', 'User\MessageController@index');
+            
         });
 
 

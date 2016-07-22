@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', trans('login.Авторизация'))
 
 @section('content')
 

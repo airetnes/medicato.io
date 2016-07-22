@@ -1,3 +1,4 @@
+<?php $user = Auth::user(); ?>
 <header class="main-header">
     <!-- Logo -->
     <a href="{{ url('#') }}" class="logo">
@@ -113,7 +114,7 @@
 
                             <p>
                                 {{ $user->last_name }} {{ $user->first_name }}
-                                - {{ $role }}
+                                - {{ (new \App\User())->getRoleName($user->role_id) }}
                                 <small>На medicato с {{ $user->created_at }}</small>
                             </p>
                         </li>
@@ -135,10 +136,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">{{ trans('user/top_nav.Профиль') }}</a>
+                                <a href="{{ url('user/profile') }}" class="btn btn-default btn-flat">{{ trans('user/top_nav.Профиль') }}</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">{{ trans('user/top_nav.Выход') }}</a>
+                                <a href="{{ url('logout') }}" class="btn btn-default btn-flat">{{ trans('user/top_nav.Выход') }}</a>
                             </div>
                         </li>
                     </ul>

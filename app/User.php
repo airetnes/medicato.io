@@ -6,13 +6,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    const ROLE_USER = 1;
+    const ROLE_DOCTOR = 2;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'last_name', 'first_name', 'middle_name', 'email', 'password', 'phone', 'role_id',
+        'last_name', 'first_name', 'middle_name', 'email', 'password', 'phone', 'role_id', 'photo'
     ];
 
     /**
@@ -25,10 +27,8 @@ class User extends Authenticatable
     ];
     
     public function getRoleName($role_id) {
-        switch ($role_id) {
-            case '1': return 'Пользователь'; break;
-            case '2': return 'Доктор'; break;
-        }
+        $role = Role::find($role_id);
+        return $role->name;
     }
     
 }

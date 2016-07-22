@@ -1,10 +1,16 @@
+<?php $user = Auth::user(); ?>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="http://news.kaznmu.kz/eng/wp-content/uploads/2015/01/IMG-20150120-WA0048-160x160.jpg" class="img-circle" alt="User Image">
+                @if($user->photo)
+                    <img src="{{ URL::asset('files/photo/' . $user->photo) }}" class="img-circle" alt="User Image">
+                @else
+                    <img src="{{ URL::asset('files/photo/default.jpg') }}" class="img-circle" alt="User Image">
+                @endif
+
             </div>
             <div class="pull-left info">
                 <p>{{ $user->last_name }} {{ $user->first_name }}</p>
@@ -25,14 +31,21 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">{{ trans('user/left_nav.Меню') }}</li>
-            <li class="active">
-                <a href="{{ url('#') }}">
+            <li {{ (Request::is(LaravelLocalization::getCurrentLocale().'/user') ? 'class=active' : '') }}>
+                <a href="{{ url('user') }}">
                     <i class="fa fa-dashboard"></i> <span>{{ trans('user/left_nav.Панель управления') }}</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ url('#') }}">
-                    <i class="fa fa-envelope-o"></i> <span>{{ trans('user/left_nav.Сообщения') }}</span>
+            @if (Auth::user()->role_id == \App\User::ROLE_DOCTOR)
+                <li {{ (Request::is(LaravelLocalization::getCurrentLocale().'/user/message') ? 'class=active' : '') }}>
+                    <a href="{{ url('user/message') }}">
+                        <i class="fa fa-user"></i> <span>{{ trans('user/left_nav.Пациенты') }}</span>
+                    </a>
+                </li>
+            @endif
+            <li {{ (Request::is(LaravelLocalization::getCurrentLocale().'/user/message') ? 'class=active' : '') }}>
+                <a href="{{ url('user/message') }}">
+                    <i class="fa fa-envelope"></i> <span>{{ trans('user/left_nav.Сообщения') }}</span>
                 </a>
             </li>
             <li class="treeview">
@@ -63,7 +76,7 @@
             </li>
 
             <li class="header">{{ trans('user/left_nav.Настройки') }}</li>
-            <li><a href="#"><i class="fa fa-circle-o text-green"></i> <span>{{ trans('user/left_nav.Профиль') }}</span></a></li>
+            <li {{ (Request::is(LaravelLocalization::getCurrentLocale().'/user/profile') ? 'class=active' : '') }}><a href="{{ url('user/profile') }}"><i class="fa fa-circle-o text-green"></i> <span>{{ trans('user/left_nav.Профиль') }}</span></a></li>
             <li><a href="{{ url('logout') }}"><i class="fa fa-circle-o text-red"></i> <span>{{ trans('user/left_nav.Выход') }}</span></a></li>
         </ul>
     </section>
