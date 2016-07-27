@@ -36,12 +36,20 @@ Route::group(
         Route::group(['middleware' => 'auth'], function()
         {
             Route::get('/user', 'User\UserController@main');
-            
+
+            //profile
             Route::get('/user/profile', 'User\UserController@profile');
             Route::post('/user/edit_profile', 'User\UserController@edit_profile');
-            
+            Route::post('/user/edit_password', 'User\UserController@edit_password');
+            Route::post('/user/change_photo', 'User\UserController@change_photo');
+            Route::get('/user/delete_photo', 'User\UserController@delete_photo');
+
+            //message
+            Route::post('/user/new_message', 'User\MessageController@add');
+            Route::get('/user/get_message_chat', 'User\MessageController@check_new');
+
             Route::get('/user/message', 'User\MessageController@index');
-            
+
         });
 
 

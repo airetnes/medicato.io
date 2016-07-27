@@ -57,6 +57,7 @@ class AuthController extends Controller
             'phone' => 'required',
             'password' => 'required|min:6|confirmed',
             'role_id' => 'required|exists:roles,id',
+            'sex' => 'required|in:1,2',
         ]);
     }
 

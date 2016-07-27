@@ -16,12 +16,22 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{URL::asset('assets/user/css/skins/_all-skins.min.css')}}">
 
+    <!-- jQuery 2.2.3 -->
+    <script src="{{URL::asset('assets/user/js/jquery-2.2.3.min.js')}}"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="{{URL::asset('assets/user/js/bootstrap.min.js')}}"></script>
+
+    {{--timeago--}}
+    <script type="text/javascript" src="{{URL::asset('assets/user/js/jquery.timeago.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('assets/user/js/jquery.timeago.ru.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('assets/user/js/jquery.timers.js')}}"></script>
+
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini fixed">
 
 <div class="wrapper">
     <!-- top navigation -->
@@ -51,10 +61,6 @@
     <div class="control-sidebar-bg"></div>
 </div>
 
-<!-- jQuery 2.2.3 -->
-<script src="{{URL::asset('assets/user/js/jquery-2.2.3.min.js')}}"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="{{URL::asset('assets/user/js/bootstrap.min.js')}}"></script>
 <!-- SlimScroll -->
 <script src="{{URL::asset('assets/user/js/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->

@@ -36,7 +36,7 @@
                     <i class="fa fa-dashboard"></i> <span>{{ trans('user/left_nav.Панель управления') }}</span>
                 </a>
             </li>
-            @if (Auth::user()->role_id == \App\User::ROLE_DOCTOR)
+            @if (Auth::user()->is(\App\User::ROLE_DOCTOR))
                 <li {{ (Request::is(LaravelLocalization::getCurrentLocale().'/user/message') ? 'class=active' : '') }}>
                     <a href="{{ url('user/message') }}">
                         <i class="fa fa-user"></i> <span>{{ trans('user/left_nav.Пациенты') }}</span>

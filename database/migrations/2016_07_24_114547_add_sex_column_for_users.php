@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPhotoColumnForUsers extends Migration
+class AddSexColumnForUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddPhotoColumnForUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('photo')->nullable();
+            $table->tinyInteger('sex')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddPhotoColumnForUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['photo']);
+            $table->dropColumn(['sex']);
         });
     }
 }

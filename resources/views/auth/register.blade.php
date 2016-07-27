@@ -99,17 +99,38 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-success {{ (old('role_id') == 1) ? 'active' : '' }}">
-                        <input type="radio" name="role_id" id="option1" value="1" autocomplete="off" {{ (old('role_id') == 1) ? 'checked' : '' }}><i class="fa fa-btn fa-user"></i> Пользователь
-                    </label>
-                    <label class="btn btn-success {{ (old('role_id') == 2) ? 'active' : '' }}">
-                        <input type="radio" name="role_id" id="option2" value="2" autocomplete="off" {{ (old('role_id') == 2) ? 'checked' : '' }}><i class="fa fa-btn fa-user-md"></i> Специалист
-                    </label>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="sex1">Укажите ваш пол</label>
+                    <div class="form-group">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-success {{ (old('sex') == 1) ? 'active' : '' }}">
+                                <input type="radio" name="sex" id="sex1" value="1" autocomplete="off" {{ (old('sex') == 1) ? 'checked' : '' }}>
+                                <i class="fa fa-btn fa-male"></i> мужской
+                            </label>
+                            <label class="btn btn-success {{ (old('sex') == 2) ? 'active' : '' }}">
+                                <input type="radio" name="sex" id="sex2" value="2" autocomplete="off" {{ (old('sex') == 2) ? 'checked' : '' }}>
+                                <i class="fa fa-btn fa-female"></i> женский
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="option1">Вы регистрируетесь как...</label>
+                    <div class="form-group">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-success {{ (old('role_id') == 1) ? 'active' : '' }}">
+                                <input type="radio" name="role_id" id="option1" value="1" autocomplete="off" {{ (old('role_id') == 1) ? 'checked' : '' }}>
+                                <i class="fa fa-btn fa-user"></i> Пользователь
+                            </label>
+                            <label class="btn btn-success {{ (old('role_id') == 2) ? 'active' : '' }}">
+                                <input type="radio" name="role_id" id="option2" value="2" autocomplete="off" {{ (old('role_id') == 2) ? 'checked' : '' }}>
+                                <i class="fa fa-btn fa-user-md"></i> Специалист
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
-
 
             <button type="submit" class="btn btn-primary">
                 Зарегистрироваться

@@ -33,7 +33,7 @@
                                 <li><!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                            <img src="{{ URL::asset('files/photo/default.jpg') }}" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Support Team
@@ -104,13 +104,21 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="http://news.kaznmu.kz/eng/wp-content/uploads/2015/01/IMG-20150120-WA0048-160x160.jpg" class="user-image" alt="User Image">
+                        @if($user->photo)
+                            <img src="{{ URL::asset('files/photo/' . $user->photo) }}" class="user-image" alt="User Image">
+                        @else
+                            <img src="{{ URL::asset('files/photo/default.jpg') }}" class="user-image" alt="User Image">
+                        @endif
                         <span class="hidden-xs">{{ $user->last_name }} {{ $user->first_name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="http://news.kaznmu.kz/eng/wp-content/uploads/2015/01/IMG-20150120-WA0048-160x160.jpg" class="img-circle" alt="User Image">
+                            @if($user->photo)
+                                <img src="{{ URL::asset('files/photo/' . $user->photo) }}" class="img-circle" alt="User Image">
+                            @else
+                                <img src="{{ URL::asset('files/photo/default.jpg') }}" class="img-circle" alt="User Image">
+                            @endif
 
                             <p>
                                 {{ $user->last_name }} {{ $user->first_name }}
@@ -119,27 +127,24 @@
                             </p>
                         </li>
                         <!-- Menu Body -->
-                        <li class="user-body">
+                        {{--<li class="user-body">
                             <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
+                                <div class="col-xs-6 text-center">
+                                    <a href="#">Сообщения</a>
                                 </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
+                                <div class="col-xs-6 text-center">
+                                    <a href="#">Консультации</a>
                                 </div>
                             </div>
                             <!-- /.row -->
-                        </li>
+                        </li>--}}
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="{{ url('user/profile') }}" class="btn btn-default btn-flat">{{ trans('user/top_nav.Профиль') }}</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ url('logout') }}" class="btn btn-default btn-flat">{{ trans('user/top_nav.Выход') }}</a>
+                                <a href="{{ url('logout') }}" class="btn btn-default btn-flat">{{ trans('user/top_nav.Выйти') }}</a>
                             </div>
                         </li>
                     </ul>

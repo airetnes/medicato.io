@@ -1,5 +1,6 @@
 @extends('user/layouts.app')
 @section('title', trans('user/message.Сообщения'))
+<?php $user = Auth::user(); ?>
 
 @section('content')
     <div class="content-wrapper">
@@ -18,259 +19,62 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-3">
-                    <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Новый запрос</a>
-
-                    <div class="box box-solid">
+                <div class="col-md-12">
+                    <div class="box box-primary direct-chat direct-chat-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Folders</h3>
-
-                            <div class="box-tools">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="box-body no-padding">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox
-                                        <span class="label label-primary pull-right">12</span></a></li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
-                            </ul>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /. box -->
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Labels</h3>
-
-                            <div class="box-tools">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="box-body no-padding">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
-                            </ul>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-9">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Inbox</h3>
+                            <h3 class="box-title">Диалог</h3>
 
                             <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input type="text" class="form-control input-sm" placeholder="Search Mail">
-                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                </div>
+                                <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
-                            <!-- /.box-tools -->
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body no-padding">
-                            <div class="mailbox-controls">
-                                <!-- Check all button -->
-                                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                                </button>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                                </div>
-                                <!-- /.btn-group -->
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                                <div class="pull-right">
-                                    1-50/200
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+
+                        <div class="box-body">
+                            <div class="direct-chat-messages" style="min-height: 400px">
+
+                                @foreach($messages as $message)
+                                <div class="direct-chat-msg{{ ($message->from != $user->id) ? ' right' : '' }}">
+                                    <input type="hidden" id="mess_id" value="{{$message->id}}">
+                                    <div class="direct-chat-info clearfix">
+                                        <span class="{{ ($message->from != $user->id) ? 'pull-right' : 'pull-left' }}">
+                                            <span class="direct-chat-name">{{ $user->last_name }} {{ $user->first_name }}</span>
+                                            <time class="direct-chat-timestamp timeago" datetime="{{ $message->created_at }}">{{ $message->created_at }}</time>
+                                        </span>
                                     </div>
-                                    <!-- /.btn-group -->
+                                    @if($user->photo)
+                                        <img src="{{ URL::asset('files/photo/' . $user->photo) }}" class="direct-chat-img" alt="User Image">
+                                    @else
+                                        <img src="{{ URL::asset('files/photo/default.jpg') }}" class="direct-chat-img" alt="User Image">
+                                    @endif
+                                    <div class="direct-chat-text {{ ($message->from != $user->id) ? 'pull-right' : 'pull-left' }}">
+                                        {{ $message->body }}
+                                    </div>
                                 </div>
-                                <!-- /.pull-right -->
+                                @endforeach
+
                             </div>
-                            <div class="table-responsive mailbox-messages">
-                                <table class="table table-hover table-striped">
-                                    <tbody>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">5 mins ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">28 mins ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">11 hours ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">15 hours ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">Yesterday</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">2 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">2 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">2 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">2 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">2 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">4 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">12 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">12 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">14 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">15 days ago</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <!-- /.table -->
-                            </div>
-                            <!-- /.mail-box-messages -->
                         </div>
                         <!-- /.box-body -->
-                        <div class="box-footer no-padding">
-                            <div class="mailbox-controls">
-                                <!-- Check all button -->
-                                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                                </button>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+
+                        <div class="box-footer">
+                            <form action="{{ LaravelLocalization::getLocalizedURL(null,'/user/new_message') }}" method="post" id="form-new_message">
+                                {{ csrf_field() }}
+                                <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
+                                <div class="input-group">
+                                    <input type="text" id="message" name="message" placeholder="Введите сообщение ..." class="form-control">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary btn-flat" id="send_message">Отправить</button>
+                                    </span>
                                 </div>
-                                <!-- /.btn-group -->
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                                <div class="pull-right">
-                                    1-50/200
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                                    </div>
-                                    <!-- /.btn-group -->
-                                </div>
-                                <!-- /.pull-right -->
-                            </div>
+                            </form>
                         </div>
+                        <!-- /.box-footer-->
+
                     </div>
-                    <!-- /. box -->
                 </div>
                 <!-- /.col -->
             </div>
@@ -278,4 +82,96 @@
         </section>
         <!-- /.content -->
     </div>
+
+    <script>
+        $(document).ready(function(){
+
+            $("time.timeago").timeago();
+
+            var chat_box = $(".direct-chat-messages");
+            var message = $('#message');
+            var user_id = $('#user_id');
+            var send_btn = $('#send_message');
+
+            // сюда буду записывать id последнего сообщения
+            var mid = $('.direct-chat-messages .direct-chat-msg:last-child input#mess_id').val();
+
+            chat_box.scrollTop(chat_box.prop('scrollHeight'));
+
+
+            chat_box.everyTime(5000, 'refresh', function() {
+                get_message_chat();
+            });
+
+            $( '#form-new_message' ).on( 'submit', function() {
+
+                if (message.val().length > 0) {
+                    send_btn.addClass('disabled');
+
+                    $.post(
+                            $( this ).prop( 'action' ),
+                            {
+                                "_token": $( this ).find( 'input[name=_token]' ).val(),
+                                "message": message.val(),
+                                "user_id": user_id.val()
+                            },
+                            function( data ) {
+                                if (data.status == 'success') {
+                                    get_message_chat();
+                                    setTimeout(function () {
+                                        chat_box.scrollTop(chat_box.prop('scrollHeight'));
+                                    }, 1);
+                                    message.val('');
+                                }
+                                send_btn.removeClass('disabled');
+                            },
+                            'json'
+                    );
+
+                    //.....
+                    //do anything else you might want to do
+                    //.....
+
+                    //prevent the form from actually submitting in browser
+                }
+                return false;
+
+            } );
+
+            function get_message_chat() {
+                console.log(mid);
+                $.ajaxSetup({url: "{{ LaravelLocalization::getLocalizedURL(null,'/user/get_message_chat') }}",global: true,type: "GET",data: "event=get&id="+mid+"&t="+(new Date).getTime()});
+                $.ajax({
+                    success: function(msg_j){
+                        if(msg_j.length > 2){
+                            var obj = JSON.parse(msg_j);
+                            for(var i=0; i < obj.length; i ++){
+                                mid = obj[i].id;
+                                console.log('id = ' + '{{ $user->id }}' + 'from = ' + obj[i].from);
+                                console.log('{{ $user->id }}' == obj[i].from);
+                                chat_box.append(
+                                        '<div class="direct-chat-msg ' + (obj[i].from == '{{ $user->id }}' ? '' : 'right') + '">' +
+                                        '<input type="hidden" id="mess_id" value="' + obj[i].id + '">' +
+                                        '<div class="direct-chat-info clearfix">' +
+                                        '<span class="'+ (obj[i].from == '{{ $user->id }}' ? 'pull-left' : 'pull-right') +'">' +
+                                        '<span class="direct-chat-name">{{ $user->last_name }} {{ $user->first_name }} </span>' +
+                                        '<time class="direct-chat-timestamp timeago" datetime="' + $.timeago(obj[i].created_at) + '">' + $.timeago(obj[i].created_at) + '</time>' +
+                                        '</span>' +
+                                        '</div>' +
+                                        '@if($user->photo)' +
+                                        '<img src="{{ URL::asset('files/photo/' . $user->photo) }}" class="direct-chat-img" alt="User Image">' +
+                                        '@else' +
+                                        '<img src="{{ URL::asset('files/photo/default.jpg') }}" class="direct-chat-img" alt="User Image">' +
+                                        '@endif' +
+                                        '<div class="direct-chat-text '+ (obj[i].from == '{{ $user->id }}' ? 'pull-left' : 'pull-right') +'">' + obj[i].body + '</div>' +
+                                        '</div>');
+                            }
+                            chat_box.scrollTop(chat_box.prop('scrollHeight'));
+                        }
+                    }
+                });
+            }
+
+        } );
+    </script>
 @endsection

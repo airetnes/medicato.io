@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Krasnoyarsk',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +166,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         // dev
-        Barryvdh\Debugbar\ServiceProvider::class,
+//        Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
@@ -222,7 +222,7 @@ return [
 
 
         //dev
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+//        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
