@@ -37,23 +37,24 @@
                             <div class="direct-chat-messages" style="min-height: 400px">
 
                                 @foreach($messages as $message)
-                                <div class="direct-chat-msg{{ ($message->from != $user->id) ? ' right' : '' }}">
-                                    <input type="hidden" id="mess_id" value="{{$message->id}}">
-                                    <div class="direct-chat-info clearfix">
+                                    {{--*/ $initial = \App\User::find($message->from) /*--}}
+                                    <div class="direct-chat-msg{{ ($message->from != $user->id) ? ' right' : '' }}">
+                                        <input type="hidden" id="mess_id" value="{{$message->id}}">
+                                        <div class="direct-chat-info clearfix">
                                         <span class="{{ ($message->from != $user->id) ? 'pull-right' : 'pull-left' }}">
-                                            <span class="direct-chat-name">{{ $user->last_name }} {{ $user->first_name }}</span>
+                                            <span class="direct-chat-name">{{ $initial->last_name }} {{ $initial->first_name }}</span>
                                             <time class="direct-chat-timestamp timeago" datetime="{{ $message->created_at }}">{{ $message->created_at }}</time>
                                         </span>
+                                        </div>
+                                        @if($initial->photo)
+                                            <img src="{{ URL::asset('files/photo/' . $initial->photo) }}" class="direct-chat-img" alt="User Image">
+                                        @else
+                                            <img src="{{ URL::asset('files/photo/default.jpg') }}" class="direct-chat-img" alt="User Image">
+                                        @endif
+                                        <div class="direct-chat-text {{ ($message->from != $user->id) ? 'pull-right' : 'pull-left' }}">
+                                            {{ $message->body }}
+                                        </div>
                                     </div>
-                                    @if($user->photo)
-                                        <img src="{{ URL::asset('files/photo/' . $user->photo) }}" class="direct-chat-img" alt="User Image">
-                                    @else
-                                        <img src="{{ URL::asset('files/photo/default.jpg') }}" class="direct-chat-img" alt="User Image">
-                                    @endif
-                                    <div class="direct-chat-text {{ ($message->from != $user->id) ? 'pull-right' : 'pull-left' }}">
-                                        {{ $message->body }}
-                                    </div>
-                                </div>
                                 @endforeach
 
                             </div>
@@ -65,7 +66,7 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
                                 <div class="input-group">
-                                    <input type="text" id="message" name="message" placeholder="Введите сообщение ..." class="form-control">
+                                    <input type="text" id="message" name="message" placeholder="Введите сообщение ..." class="form-control" autofocus>
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-primary btn-flat" id="send_message">Отправить</button>
                                     </span>

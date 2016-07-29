@@ -49,7 +49,7 @@
 
                     <div class="soc_buttons">
                         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                            <?php $flag = ($localeCode == 'en') ? 'um' : $localeCode; ?>
+                            <?php $flag = ($localeCode == 'en') ? 'gb' : $localeCode; ?>
                             <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
                                 <span class="flag-icon flag-icon-{{$flag}} flag-icon-background"></span>
                             </a>
