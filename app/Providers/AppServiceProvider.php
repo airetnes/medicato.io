@@ -14,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->share('CountNewMessage', count(Message::CountNewMessage()));
+        \View::composer(['user.main', 'user.profile'], function($view){
+            $view->with('CountNewMessage', count(Message::CountNewMessage()));
+        });
     }
 
     /**

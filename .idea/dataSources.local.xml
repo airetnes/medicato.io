@@ -4,8 +4,8 @@
     <data-source name="MySQL - medicato@localhost" uuid="939d819c-e956-4c49-8822-78b08adeb3b8">
       <secret-storage>memory</secret-storage>
       <user-name>root</user-name>
-      <introspection-scope>med:*</introspection-scope>
-      <resolve-scope>med:*</resolve-scope>
+      <schema-pattern>med.*</schema-pattern>
+      <default-schemas>med.*</default-schemas>
     </data-source>
   </component>
 </project>
