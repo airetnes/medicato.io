@@ -16,7 +16,9 @@ class MessageController extends Controller
             ->orWhere('to', \Auth::user()->id)
             ->orderBy('created_at')
             ->get();
-        return view('user.message', ['messages' => $messages]);
+        $contents['messages'] = $messages;
+        $contents['CountNewMessage'] = count(Message::CountNewMessage());
+        return view('user.message', $contents);
     }
 
     public function add() {

@@ -23,7 +23,7 @@
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="label label-success">4</span>
+                        <span class="label label-success">{{ $CountNewMessage }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">You have 4 messages</li>
@@ -157,3 +157,10 @@
         </div>
     </nav>
 </header>
+<script>
+    $(document).ready(function() {
+        socket.on('update_count_message', function (data) {
+            $("#new_count_message").html(data.update_count_message);
+        });
+    });
+</script>

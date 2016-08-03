@@ -25,6 +25,7 @@
     <script type="text/javascript" src="{{URL::asset('assets/user/js/jquery.timeago.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('assets/user/js/jquery.timeago.ru.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('assets/user/js/jquery.timers.js')}}"></script>
+    {!! Html::script('node_modules/socket.io-client/socket.io.js') !!}
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -32,7 +33,9 @@
     <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
-
+<script>
+    var socket = io.connect( 'http://'+window.location.hostname+':3000' );
+</script>
 <div class="wrapper">
     <!-- top navigation -->
     @include('user/layouts._top_nav')

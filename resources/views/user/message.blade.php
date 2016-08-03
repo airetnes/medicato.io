@@ -25,7 +25,7 @@
                             <h3 class="box-title">Диалог</h3>
 
                             <div class="box-tools pull-right">
-                                <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>
+                                <span data-toggle="tooltip" title="3 New Messages" id="new_count_message" class="badge bg-light-blue">{{ $CountNewMessage }}</span>
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                 </button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -86,6 +86,13 @@
 
     <script>
         $(document).ready(function(){
+//            socket.emit('update_count_message', {
+//                update_count_message: 4
+//            });
+
+            socket.on( 'update_count_message', function( data ) {
+                $( "#new_count_message" ).html( data.update_count_message );
+            });
 
             $("time.timeago").timeago();
 
