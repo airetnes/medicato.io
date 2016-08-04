@@ -43,11 +43,20 @@
                     </a>
                 </li>
             @endif
-            <li {{ (Request::is(LaravelLocalization::getCurrentLocale().'/user/message') ? 'class=active' : '') }}>
-                <a href="{{ url('user/message') }}">
-                    <i class="fa fa-envelope"></i> <span>{{ trans('user/left_nav.Сообщения') }}</span>
-                </a>
-            </li>
+
+            @if (Auth::user()->is(\App\User::ROLE_ADMIN))
+                <li {{ (Request::is(LaravelLocalization::getCurrentLocale().'/user/message') ? 'class=active' : '') }}>
+                    <a href="{{ url('user/message') }}">
+                        <i class="fa fa-envelope"></i> <span>{{ trans('user/left_nav.Сообщения') }}</span>
+                    </a>
+                </li>
+            @else
+                <li {{ (Request::is(LaravelLocalization::getCurrentLocale().'/user/message') ? 'class=active' : '') }}>
+                    <a href="{{ url('user/message') }}">
+                        <i class="fa fa-envelope"></i> <span>{{ trans('user/left_nav.Сообщения') }}</span>
+                    </a>
+                </li>
+            @endif
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-credit-card"></i>

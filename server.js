@@ -14,7 +14,14 @@ io.on('connection', function (socket) {
 
     console.log('Connected: ' + Object.keys(io.sockets.connected).length + ' users.');
 
+    socket.on( 'login_new_user', function (data) {
+        io.sockets.emit('login_new_user', {
+            login_new_user: data.login_new_user
+        });
+    });
+
     socket.on( 'new_count_message', function( data ) {
+        console.log('new_count_message:' + data.new_count_message);
         io.sockets.emit( 'new_count_message', {
             new_count_message: data.new_count_message
 
@@ -22,18 +29,19 @@ io.on('connection', function (socket) {
     });
 
     socket.on( 'update_count_message', function( data ) {
+        console.log('update_count_message:' + data.update_count_message);
         io.sockets.emit( 'update_count_message', {
             update_count_message: data.update_count_message
         });
     });
 
     socket.on( 'new_message', function( data ) {
+        console.log(data);
         io.sockets.emit( 'new_message', {
-            name: data.name,
-            email: data.email,
-            subject: data.subject,
+            message: data.message,
+            user_id: data.user_id,
             created_at: data.created_at,
-            id: data.id
+            user_name: data.user_name
         });
     });
 

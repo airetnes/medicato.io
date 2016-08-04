@@ -36,6 +36,8 @@ class MessageController extends Controller
         }
         $user_id = Input::get( 'user_id' );
         $message = Input::get( 'message' );
+        $created_at = Input::get('created_at');
+        $user_name = Input::get('user_name');
 
         Message::create([
             'to' => (\Auth::user()->id != 1) ? 1 : 45,
@@ -44,9 +46,12 @@ class MessageController extends Controller
         ]);
 
         $response = [
-            'id' => $user_id,
+            'user_id' => $user_id,
             'message' => $message,
-            'status' => 'success',
+            'created_at' => $created_at,
+            'user_name' => $user_name,
+            'new_count_message' => count(Message::CountNewMessage()),
+            'status' => 'success'
         ];
 
         return \Response::json( $response );

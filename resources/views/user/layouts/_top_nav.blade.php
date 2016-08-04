@@ -23,7 +23,7 @@
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="label label-success">{{ $CountNewMessage }}</span>
+                        <span class="label label-success new_count_message">{{ $CountNewMessage }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">You have 4 messages</li>

@@ -63,7 +63,17 @@
 
     <div class="control-sidebar-bg"></div>
 </div>
+<script>
+    socket.on('new_count_message', function (data) {
+        console.log('new_count_message: ' + data.new_count_message);
+        $( ".new_count_message" ).html( data.new_count_message );
+    });
 
+    socket.on('update_count_message', function( data ) {
+        console.log('update_count_message: ' + data.update_count_message);
+        $( ".new_count_message" ).html( data.update_count_message );
+    });
+</script>
 <!-- SlimScroll -->
 <script src="{{URL::asset('assets/user/js/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->
