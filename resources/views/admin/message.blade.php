@@ -66,6 +66,7 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" id="user_name" value="{{ $user->last_name . ' ' . $user->first_name }}">
                                 <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" id="parent_id" value="{{ $messages[0]->parent_id }}">
                                 <div class="input-group">
                                     <input type="text" id="message" name="message" placeholder="Введите сообщение ..." class="form-control" autofocus>
                                     <span class="input-group-btn">
@@ -108,10 +109,10 @@
             var user_name = $('#user_name');
             var send_btn = $('#send_message');
             var user_role = '{{ Auth::user()->role_id }}';
+            var parent_id = $('#parent_id');
 
 
-            socket.emit('join_room', {"user_room": user_id.val()});
-
+            socket.emit('join_room', {"user_room": parent_id.val()});
 
             chat_box.scrollTop(chat_box.prop('scrollHeight'));
 

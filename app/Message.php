@@ -11,6 +11,8 @@ class Message extends Model
     ];
     
     public function scopeCountNewMessage() {
-        return $this->where('status',0)->get();
+        return $this->where('status',0)
+            ->where('from', \Auth::user()->id)
+            ->get();
     }
 }

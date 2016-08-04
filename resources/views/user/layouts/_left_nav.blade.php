@@ -45,8 +45,8 @@
             @endif
 
             @if (Auth::user()->is(\App\User::ROLE_ADMIN))
-                <li {{ (Request::is(LaravelLocalization::getCurrentLocale().'/user/message') ? 'class=active' : '') }}>
-                    <a href="{{ url('user/message') }}">
+                <li {{ (Request::is(LaravelLocalization::getCurrentLocale().'/admin/messages') ? 'class=active' : '') }}>
+                    <a href="{{ url('admin/messages') }}">
                         <i class="fa fa-envelope"></i> <span>{{ trans('user/left_nav.Сообщения') }}</span>
                     </a>
                 </li>

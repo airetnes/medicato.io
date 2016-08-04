@@ -1,4 +1,4 @@
-@extends('user/layouts.app')
+@extends('../user/layouts.app')
 @section('title', trans('user/message.Сообщения'))
 <?php $user = Auth::user();?>
 
@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="box box-primary direct-chat direct-chat-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Диалог</h3>
+                            <h3 class="box-title">Диалоги</h3>
 
                             <div class="box-tools pull-right">
                                 <span data-toggle="tooltip" title="{{ $CountNewMessage }} New Messages" class="badge bg-light-blue new_count_message">{{ $CountNewMessage }}</span>
@@ -33,46 +33,40 @@
                         </div>
                         <!-- /.box-header -->
 
-                        <div class="box-body">
-                            <div class="direct-chat-messages" style="min-height: 400px">
+                        <div class="box-body direct-chat-contacts-open" style="min-height: 400px">
 
-                                @foreach($messages as $message)
-                                    {{--*/ $initial = \App\User::find($message->from) /*--}}
-                                    <div class="direct-chat-msg{{ ($message->from != $user->id) ? ' right' : '' }}">
-                                        <input type="hidden" id="mess_id" value="{{$message->id}}">
-                                        <div class="direct-chat-info clearfix">
-                                        <span class="{{ ($message->from != $user->id) ? 'pull-right' : 'pull-left' }}">
-                                            <span class="direct-chat-name">{{ $initial->last_name }} {{ $initial->first_name }}</span>
-                                            <time class="direct-chat-timestamp timeago" datetime="{{ $message->created_at }}">{{ $message->created_at }}</time>
-                                        </span>
-                                        </div>
-                                        @if($initial->photo)
-                                            <img src="{{ URL::asset('files/photo/' . $initial->photo) }}" class="direct-chat-img" alt="User Image">
-                                        @else
-                                            <img src="{{ URL::asset('files/photo/default.jpg') }}" class="direct-chat-img" alt="User Image">
-                                        @endif
-                                        <div class="direct-chat-text {{ ($message->from != $user->id) ? 'pull-right' : 'pull-left' }}">
-                                            {{ $message->body }}
-                                        </div>
-                                    </div>
-                                @endforeach
+                            <div class="direct-chat-contacts" style="min-height: 400px">
+                                <ul class="contacts-list">
+                                    @foreach($messages as $message)
+                                        {{--*/ $initial = \App\User::find($message->from) /*--}}
+                                        {{--*/ $last_body = \App\Message::where('parent_id', $message->parent_id)->get()->last() /*--}}
+                                        <li>
+                                            <a href="{{ url('admin/message/'.$message->from) }}">
+                                                @if($initial->photo)
+                                                    <img src="{{ URL::asset('files/photo/' . $initial->photo) }}" class="contacts-list-img" alt="User Image">
+                                                @else
+                                                    <img src="{{ URL::asset('files/photo/default.jpg') }}" class="contacts-list-img" alt="User Image">
+                                                @endif
 
+                                                <div class="contacts-list-info">
+                                                    <span class="contacts-list-name">
+                                                        {{ $initial->last_name }} {{ $initial->first_name }}
+                                                        <small class="contacts-list-date pull-right"><time class="timeago" datetime="{{ $last_body->created_at }}">{{ $last_body->created_at }}</time></small>
+                                                    </span>
+                                                    <span class="contacts-list-msg">{{ ($last_body->from == Auth::user()->id) ? 'Вы: ' . $last_body->body : $last_body->body }}</span>
+                                                </div>
+                                                <!-- /.contacts-list-info -->
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                    <!-- End Contact Item -->
+                                </ul>
+                                <!-- /.contatcts-list -->
                             </div>
                         </div>
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <form action="{{ LaravelLocalization::getLocalizedURL(null,'/user/new_message') }}" method="post" id="form-new_message">
-                                {{ csrf_field() }}
-                                <input type="hidden" id="user_name" value="{{ $user->last_name . ' ' . $user->first_name }}">
-                                <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
-                                <div class="input-group">
-                                    <input type="text" id="message" name="message" placeholder="Введите сообщение ..." class="form-control" autofocus>
-                                    <span class="input-group-btn">
-                                        <button type="submit" class="btn btn-primary btn-flat" id="send_message">Отправить</button>
-                                    </span>
-                                </div>
-                            </form>
                         </div>
                         <!-- /.box-footer-->
 
@@ -144,6 +138,10 @@
                                         user_role: data.user_role,
                                         user_name: data.user_name
                                     });
+
+                                    setTimeout(function () {
+                                        chat_box.scrollTop(chat_box.prop('scrollHeight'));
+                                    }, 1);
                                     message.val('');
                                 }
                                 send_btn.removeClass('disabled');

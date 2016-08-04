@@ -37,7 +37,7 @@
                             </a>
 
                             <ul class="sub-menu" role="menu">
-                                <li><a href="{{ url('/#') }}"><i class="fa fa-btn fa-tachometer"></i>{{ trans('nav.Панель управления') }}</a></li>
+                                <li><a href="{{ url('/user') }}"><i class="fa fa-btn fa-tachometer"></i>{{ trans('nav.Панель управления') }}</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>{{ trans('nav.Выход') }}</a></li>
                             </ul>
                         </li>

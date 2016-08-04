@@ -54,7 +54,8 @@ Route::group(
 
         // лк админ
         Route::group(['middleware' => 'role:'. User::ROLE_ADMIN], function() {
-            Route::get('/admin/message', 'Admin\MessagesController@main');
+            Route::get('/admin/messages', 'Admin\MessagesController@main');
+            Route::get('/admin/message/{id}', 'Admin\MessagesController@message');
         });
 
 

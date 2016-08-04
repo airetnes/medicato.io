@@ -35,6 +35,7 @@
 <body class="hold-transition skin-blue sidebar-mini fixed">
 <script>
     var socket = io.connect( 'http://'+window.location.hostname+':3000' );
+    socket.emit('info_connected_user', { "uid": '{{ Auth::user()->id }}', "uinitial": '{{ Auth::user()->last_name }} {{ Auth::user()->first_name }}', "role_id": '{{ Auth::user()->role_id }}'});
 </script>
 <div class="wrapper">
     <!-- top navigation -->
